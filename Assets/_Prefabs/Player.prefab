@@ -571,7 +571,7 @@ MonoBehaviour:
   sensor: {fileID: 7792351775826231402}
   minBeepPerSec: 0.2
   maxBeepPerSec: 5
-  beep: {fileID: 8300000, guid: 35552ccdd29f64473939399fe852d5fc, type: 3}
+  beep: {fileID: 8300000, guid: c55c48a4dc7894e53a3120b1b5751ddd, type: 3}
   beepHz: 0
   fovDetectionActivationDistance: 4
   msToNextBeep: 0
@@ -609,6 +609,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  autoPickupInSeconds: 10
+  timeToAutoPickUp: 0
   wifiSprites:
   - {fileID: 1061348099}
   - {fileID: 732790957}
