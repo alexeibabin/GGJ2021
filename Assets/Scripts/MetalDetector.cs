@@ -171,4 +171,9 @@ public class MetalDetector : MonoBehaviour
             }
         }
     }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(this.transform.position + Vector3.up, new Vector3(1,2,1));
+    }
 }

@@ -56,5 +56,8 @@ public class NarrativeItem : MonoBehaviour
         }
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(this.transform.position, 1);
+    }
 }
