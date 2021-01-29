@@ -11,12 +11,17 @@ public class UIItemManager : MonoBehaviour
     private UIPickedItem _lastItemSpawned;
     public void ShowItem(Sprite s)
     {
+        HideItem();
+
         _lastItemSpawned = Instantiate(_itemPrefab, transform);
         _lastItemSpawned.Init(s);
     }
 
     public void HideItem()
     {
+        if(_lastItemSpawned == null)
+            return;
+
         Debug.LogFormat("Removed {0}", _lastItemSpawned.name);
         Destroy(_lastItemSpawned.gameObject);
     }
