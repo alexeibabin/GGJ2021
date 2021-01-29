@@ -23,8 +23,14 @@ public class MetalDetector : MonoBehaviour
     private float timeSinceLastBeep = 0f;
 
     private Camera mainCamera = null;
-
+    
     public bool lookingAtObject = false;
+
+    private GameObject closestObject = null;
+
+    [Header("---debug----")]
+    public bool pickUpItem = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +41,6 @@ public class MetalDetector : MonoBehaviour
     {
         var myPosition = transform.position;
         var closestDistance = sensor.SensorRange;
-        GameObject closestObject = null;
         sensor.DetectedObjects.Sort((a, b) =>
             Mathf.RoundToInt(Vector3.Distance(a.transform.position, myPosition) - Vector3.Distance(b.transform.position, myPosition)));
 
@@ -94,5 +99,15 @@ public class MetalDetector : MonoBehaviour
     {
         CalculateBeepHz();
         Beep();
+
+        if (pickUpItem)
+        {
+            pickUpItem = false;
+            var c = closestObject.GetComponent<NarrativeItem>();
+            if (c != null)
+            {
+                c.OnPickUp();
+            }
+        }
     }
 }
