@@ -6,7 +6,7 @@ public class Game : MonoBehaviour
 {
     public static Game i;
 
-    [SerializeField] private Player player;
+    public Player player;
     
     private Game()
     {
