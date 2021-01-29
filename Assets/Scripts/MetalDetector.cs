@@ -23,9 +23,17 @@ public class MetalDetector : MonoBehaviour
     private float timeSinceLastBeep = 0f;
     
     public AnimationCurve beepCurve;
+
+    [Header("Wifi indicator stuff")] 
     
+    public GameObject[] wifiSprites;
+
+    public float[] wifiThresholds;
+
     private Camera mainCamera = null;
-    
+
+    [SerializeField]
+    private float normalizedDistance = 0f;
     
     private GameObject closestObject = null;
 
@@ -58,7 +66,7 @@ public class MetalDetector : MonoBehaviour
         }
         
         //distance to object form 0 to 1. when 1 is closest
-        var normalizedDistance = 0f;
+        normalizedDistance = 0f;
 
         if (sensor.DetectedObjects.Count > 0)
         {
@@ -104,13 +112,21 @@ public class MetalDetector : MonoBehaviour
             timeSinceLastBeep = Int16.MaxValue;
         }
     }
+
+    void ShowWifiSymbols()
+    {
+        for (int i = 0; i < wifiThresholds.Length; i++)
+        {
+            wifiSprites[i].SetActive(normalizedDistance > wifiThresholds[i]);
+        }
+    }
     
     // Update is called once per frame
     void Update()
     {
         CalculateBeepHz();
         Beep();
-
+        ShowWifiSymbols();
         if (pickUpItem)
         {
             pickUpItem = false;
