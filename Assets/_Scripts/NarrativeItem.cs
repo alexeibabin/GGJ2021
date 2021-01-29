@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class NarrativeItem : MonoBehaviour
 {
+    [Header("Resources")]
     [SerializeField] private NarrativeItem[] _nextSteps;
+
+    [Header("References")]
     [SerializeField] private Vector3 _offsetFromPlayer;
 
-    [SerializeField] private float _timeToShowNewItem = 2.5f;
+    [SerializeField] private float _timeUntilStepEnd = 5f;
+
+    [SerializeField] private Sprite _itemSprite;
 
     //  This initializes the item once the previous one was picked up
     public void Init() 
@@ -24,20 +29,25 @@ public class NarrativeItem : MonoBehaviour
 
     //  This is called when the item is picked up
     public void OnPickUp() {
+
+        Debug.LogFormat("Picked up {0} Item!", name);
         StartCoroutine(ShowItem());
     }
 
     private IEnumerator ShowItem()
     {
         //  Show the item
+        Game.i.itemManager.ShowItem(_itemSprite);
 
-        yield return new WaitForSeconds(_timeToShowNewItem);
+        yield return new WaitForSeconds(_timeUntilStepEnd);
 
-        OnStepEnd();
+        EndStep();
     }
 
     //  This is called one the step ends and it's in charge of setting up the next items
-    public void OnStepEnd() {
+    public void EndStep() {
+
+        Game.i.itemManager.HideItem();
 
         foreach (var step in _nextSteps)
         {

@@ -8,9 +8,16 @@ public class UIItemManager : MonoBehaviour
     [SerializeField] private UIPickedItem _itemPrefab;
 
 
+    private UIPickedItem _lastItemSpawned;
     public void ShowItem(Sprite s)
     {
-        var item = Instantiate(_itemPrefab, transform);
-        item.Init(s);
+        _lastItemSpawned = Instantiate(_itemPrefab, transform);
+        _lastItemSpawned.Init(s);
+    }
+
+    public void HideItem()
+    {
+        Debug.LogFormat("Removed {0}", _lastItemSpawned.name);
+        Destroy(_lastItemSpawned.gameObject);
     }
 }

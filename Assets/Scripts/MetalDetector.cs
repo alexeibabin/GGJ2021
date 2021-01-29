@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using SensorToolkit;
 using UnityEngine;
 public class MetalDetector : MonoBehaviour
@@ -111,10 +112,11 @@ public class MetalDetector : MonoBehaviour
         CalculateBeepHz();
         Beep();
 
-        if (pickUpItem)
+        if (Input.GetKeyUp(KeyCode.P))
         {
             pickUpItem = false;
-            var c = closestObject.GetComponent<NarrativeItem>();
+
+            var c = FindObjectsOfType<NarrativeItem>().First();
             if (c != null)
             {
                 c.OnPickUp();

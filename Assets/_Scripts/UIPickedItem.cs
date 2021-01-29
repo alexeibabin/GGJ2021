@@ -9,6 +9,9 @@ public class UIPickedItem : MonoBehaviour
 
     public void Init(Sprite sprite)
     {
-        _itemImage.sprite = sprite;
+        if(sprite != null)
+            _itemImage.sprite = sprite;
+        else
+            Debug.LogError("Use a fucking sprite. There's no sprite!");
     }
 }

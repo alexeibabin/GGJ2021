@@ -61,3 +61,4 @@ MonoBehaviour:
   _nextSteps: []
   _offsetFromPlayer: {x: 50, y: 50, z: 0}
   _timeToShowNewItem: 2.5
+  _itemSprite: {fileID: 21300000, guid: 8fdc5e3c25ce5604097803f32b297d8a, type: 3}
