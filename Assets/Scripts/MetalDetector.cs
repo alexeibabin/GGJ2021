@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using SensorToolkit;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 public class MetalDetector : MonoBehaviour
 {
     public RangeSensor sensor;
@@ -25,6 +27,11 @@ public class MetalDetector : MonoBehaviour
     
     public AnimationCurve beepCurve;
 
+    public float autoPickupInSeconds = 10f;
+
+    [SerializeField]
+    private float timeToAutoPickUp;
+    
     [Header("Wifi indicator stuff")] 
     
     public GameObject[] wifiSprites;
@@ -121,6 +128,28 @@ public class MetalDetector : MonoBehaviour
             wifiSprites[i].SetActive(normalizedDistance > wifiThresholds[i]);
         }
     }
+
+    void PickUpItems()
+    {
+        if (wifiSprites[wifiSprites.Length - 1].activeSelf)
+        {
+            timeToAutoPickUp -= Time.deltaTime;
+            if (Input.GetMouseButtonDown(0) || timeToAutoPickUp < 0)
+            {
+                Debug.Log("Picking up " + closestObject.name);
+                timeToAutoPickUp = autoPickupInSeconds;
+                var c = closestObject.GetComponent<NarrativeItem>();
+                if (c != null)
+                {
+                    c.OnPickUp();
+                }
+            }
+        }
+        else
+        {
+            timeToAutoPickUp = autoPickupInSeconds;
+        }
+    }
     
     // Update is called once per frame
     void Update()
@@ -129,6 +158,8 @@ public class MetalDetector : MonoBehaviour
         Beep();
 
         ShowWifiSymbols();
+        PickUpItems();
+        
         if (pickUpItem || Input.GetKeyUp(KeyCode.P))
         {
             pickUpItem = false;
