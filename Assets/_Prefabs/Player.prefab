@@ -235,13 +235,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensor: {fileID: 7792351775826231402}
   minBeepPerSec: 0.2
-  maxBeepPerSec: 12
+  maxBeepPerSec: 8
   beep: {fileID: 8300000, guid: 35552ccdd29f64473939399fe852d5fc, type: 3}
   beepHz: 0
   fovDetectionActivationDistance: 4
   msToNextBeep: 0
   timeSinceLastBeep: 0
+  beepCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.598028
+      outSlope: 0.598028
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.644362
+      value: 0.3853465
+      inSlope: 2.199985
+      outSlope: 2.199985
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8060303
+      value: 1
+      inSlope: 3.8019419
+      outSlope: 3.8019419
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   lookingAtObject: 0
+  pickUpItem: 0
 --- !u!1 &7792351776080400495
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +500,7 @@ MonoBehaviour:
   _smoothTime: 5
   _clampPitch: 1
   _minPitchAngle: -90
-  _maxPitchAngle: 90
+  _maxPitchAngle: 35
 --- !u!114 &7792351776097546687
 MonoBehaviour:
   m_ObjectHideFlags: 0

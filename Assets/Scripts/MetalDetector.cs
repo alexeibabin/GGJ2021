@@ -21,14 +21,17 @@ public class MetalDetector : MonoBehaviour
     private float msToNextBeep;
     [SerializeField]
     private float timeSinceLastBeep = 0f;
-
+    
+    public AnimationCurve beepCurve;
+    
     private Camera mainCamera = null;
     
-    public bool lookingAtObject = false;
-
+    
     private GameObject closestObject = null;
 
     [Header("---debug----")]
+    public bool lookingAtObject = false;
+
     public bool pickUpItem = false;
 
     // Start is called before the first frame update
@@ -80,17 +83,25 @@ public class MetalDetector : MonoBehaviour
             }
         }
 
-        beepHz = normalizedDistance != 0 ? Mathf.Lerp(minBeepPerSec, maxBeepPerSec, normalizedDistance) : 0;
+        
+        beepHz = normalizedDistance != 0 ? minBeepPerSec + (maxBeepPerSec * beepCurve.Evaluate(normalizedDistance)) : 0;
         msToNextBeep = 1000 / beepHz;
     }
 
     void Beep()
     {
-        timeSinceLastBeep += Time.deltaTime * 1000;
-        if (timeSinceLastBeep >= msToNextBeep)
+        if (beepHz > 0)
         {
-            timeSinceLastBeep = 0;
-            AudioSource.PlayClipAtPoint(beep,transform.position);
+            timeSinceLastBeep += Time.deltaTime * 1000;
+            if (timeSinceLastBeep >= msToNextBeep)
+            {
+                timeSinceLastBeep = 0;
+                AudioSource.PlayClipAtPoint(beep, transform.position);
+            }
+        }
+        else
+        {
+            timeSinceLastBeep = Int16.MaxValue;
         }
     }
     
