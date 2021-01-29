@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NarrativeObject : MonoBehaviour
+public class NarrativeItem : MonoBehaviour
 {
-    [SerializeField] private NarrativeObject[] _nextSteps;
+    [SerializeField] private NarrativeItem[] _nextSteps;
     [SerializeField] private Vector3 _offsetFromPlayer;
 
     [SerializeField] private float _timeToShowNewItem = 2.5f;
@@ -19,6 +19,7 @@ public class NarrativeObject : MonoBehaviour
     private void PlaceInWorld()
     {
         transform.position = Game.i.player.transform.position + _offsetFromPlayer;
+        //  Needs to account for the terrain height in that new position
     }
 
     //  This is called when the item is picked up

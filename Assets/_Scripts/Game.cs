@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public static Game i;
 
     public Player player;
+    public UIItemManager itemManager;
     
     private Game()
     {
