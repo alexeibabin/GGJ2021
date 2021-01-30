@@ -2,29 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NarrativeItem : MonoBehaviour
 {
-    [Header("Resources")]
+    [Header("Parameters")]
+    [SerializeField] private Sprite _itemSprite;
+    [SerializeField] private string _narrativeText;
+    [SerializeField] private float _timeUntilStepEnd = 5f;
+    [SerializeField] private float _timeUntilItemFades = 2f;
+
+    [Header("Next steps")]
     [SerializeField] private NarrativeItem[] _nextSteps;
 
-    [Header("References")]
-    [SerializeField] private Vector3 _offsetFromPlayer;
 
-    [SerializeField] private float _timeUntilStepEnd = 5f;
-
-    [SerializeField] private Sprite _itemSprite;
 
     //  This initializes the item once the previous one was picked up
     public void Init() 
     {
-        PlaceInWorld();
-    }
-
-    private void PlaceInWorld()
-    {
-        transform.position = Game.i.player.transform.position + _offsetFromPlayer;
-        //  Needs to account for the terrain height in that new position
     }
 
     //  This is called when the item is picked up
@@ -37,9 +32,11 @@ public class NarrativeItem : MonoBehaviour
     private IEnumerator ShowItem()
     {
         //  Show the item
-        Game.i.itemManager.ShowItem(_itemSprite);
+        Game.i.itemManager.ShowItem(_itemSprite, _narrativeText);
 
         yield return new WaitForSeconds(_timeUntilStepEnd);
+
+        Game.i.itemManager.ClearFromView();
 
         EndStep();
     }
@@ -51,8 +48,9 @@ public class NarrativeItem : MonoBehaviour
 
         foreach (var step in _nextSteps)
         {
-            var newStep = Instantiate(step, transform.parent);
-            newStep.Init();
+            //var newStep = Instantiate(step, transform.parent);
+            //newStep.Init();
+            step.gameObject.SetActive(true);
         }
     }
 

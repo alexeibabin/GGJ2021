@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 1332419788}
+  _narrativeText: {fileID: 565306212}
 --- !u!95 &325292301
 Animator:
   serializedVersion: 3
