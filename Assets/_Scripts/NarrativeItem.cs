@@ -8,7 +8,8 @@ public class NarrativeItem : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private Sprite _itemSprite;
-    [SerializeField] private string _narrativeText;
+    [TextArea]
+    [SerializeField] private string  _narrativeText;
     [SerializeField] private float _timeUntilStepEnd = 5f;
     [SerializeField] private float _timeUntilItemFades = 2f;
 

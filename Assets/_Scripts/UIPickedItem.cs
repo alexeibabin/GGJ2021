@@ -17,6 +17,17 @@ public class UIPickedItem : MonoBehaviour
             Debug.LogError("Use a fucking sprite. There's no sprite!");
 
             _narrativeText.text = text;
+
+        StartCoroutine(ShowDelayedText());
+    }
+
+    private IEnumerator ShowDelayedText()
+    {
+        _narrativeText.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.5f);
+
+        _narrativeText.gameObject.SetActive(true);
     }
 
     internal void HideItem()
