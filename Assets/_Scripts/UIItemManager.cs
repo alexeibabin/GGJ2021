@@ -24,7 +24,7 @@ public class UIItemManager : MonoBehaviour
             return;
 
         _lastItemSpawned.HideItem();
-    }
+    } 
 
     internal void ClearFromView()
     {
